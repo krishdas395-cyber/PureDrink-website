@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Juices | Pure Juice</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --brand-primary: #FF5722;
+            --brand-secondary: #00E676;
+            --bg-color: #FAFBFC;
+            --text-dark: #111827;
+            --text-muted: #6B7280;
+            --card-bg: #FFFFFF;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif; 
+            padding-top: 80px;
+        }
+
+        h1, h2, h3, h4, h5, h6, .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .brand-dot { color: var(--brand-primary); }
+        .nav-link { font-weight: 600; font-size: 0.95rem; margin: 0 15px;}
+        .nav-link:hover, .nav-link.active { color: var(--brand-primary) !important; }
+        
+        .btn-cart {
+            background: linear-gradient(135deg, var(--brand-primary), #FF8A50);
+            color: white !important;
+            border: none;
+            padding: 8px 24px;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 87, 34, 0.4);
+        }
+
+        .cart-badge {
+            background-color: white;
+            color: var(--brand-primary);
+        }
+
+        .shop-header {
+            background: linear-gradient(rgba(17, 24, 39, 0.6), rgba(17, 24, 39, 0.8)), url('https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=1920&q=80') center/cover;
+            padding: 80px 0;
+            color: white;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .shop-header h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -1px; }
+
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 2px solid #E5E7EB;
+            color: var(--text-muted);
+            border-radius: 50px;
+            padding: 8px 24px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--text-dark);
+            border-color: var(--text-dark);
+            color: white;
+        }
+
+        .products-section { padding-bottom: 6rem; }
+        
+        .product-item {
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: none;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-dark);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        
+        .card-img-wrapper {
+            padding: 20px;
+            background: #F3F4F6;
+            border-radius: 24px 24px 0 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .card-img-top {
+            height: 220px;
+            width: 220px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .card-img-top { transform: scale(1.08) rotate(5deg); }
+        
+        .card-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 25px;
+        }
+        
+        .product-tags {
+            font-size: 0.75rem;
+            color: var(--brand-secondary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .card-title { font-weight: 700; font-size: 1.4rem; }
+        .card-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+        
+        .price-wrap {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .price { font-size: 1.5rem; font-weight: 800; font-family: 'Poppins', sans-serif; }
+        
+        .btn-add-to-cart {
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        width: 100%;
+        padding: 12px;
+        transition: all 0.3s;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        }
+        .btn-add-to-cart:hover {
+        background-color: var(--text-dark);
+        color: white;
+        box-shadow: 0 10px 20px rgba(0, 230, 118, 0.3);
+        }
+
+        .footer-custom { background-color: var(--text-dark); color: white; font-family: 'Inter', sans-serif; }
+        .blue { color: var(--brand-secondary); }
+        .social-icon { color: white; font-size: 1rem; transition: color 0.3s, transform 0.3s; display: inline-block; }
+        .social-icon:hover { color: var(--brand-secondary); transform: scale(1.2); }
+        .mb-0 > a { text-decoration: none; color: white; transition: color 0.3s, transform 0.3s; display: inline-block; }
+        .mb-0 > a:hover { color: var(--brand-secondary); transform: scale(1.2); }
+        .blue{
+            color: var(--brand-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Pure<span class="blue">Drink</span><span class="brand-dot">.</span></a>
+            
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list fs-1 text-dark"></i>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="shop.html">Shop Juices</a></li>
+                </ul>
+                <a href="noPG.html" class="btn btn-cart rounded-pill px-4">
+                    <i class="bi bi-cart3"></i> Cart <span id="cart-counter" class="badge rounded-pill cart-badge ms-1">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="shop-header">
+        <div class="container">
+            <h1>Shop Pure Juice.</h1>
+            <p class="lead mb-0">100% Cold-Pressed. 0% Compromise.</p>
+        </div>
+    </header>
+
+    <section class="products-section container">
+        
+        <div class="filter-container text-center mb-5">
+            <a href="#" class="filter-btn active" data-filter="all">All Blends</a>
+            <a href="#" class="filter-btn" data-filter="hydration">Hydration</a>
+            <a href="#" class="filter-btn" data-filter="immunity">Immunity</a>
+            <a href="#" class="filter-btn" data-filter="energy">Energy & Recovery</a>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5" id="shop-grid">
+            
+            <!-- 1. White Burst -->
+            <div class="col product-item" data-category="immunity">
+                <div class="product-card">
+                    <a href="benefits.html" class="card-img-wrapper text-decoration-none">
+                        <img src="./images/white.png" class="card-img-top" alt="White Burst">
+                    </a>
+                    <div class="card-body">
+                        <span class="product-tags">Immunity • Refreshment</span>
+                        <h4 class="card-title mt-1">White Burst</h4>
+                        <p class="card-text">Coconut and lychee for an morning kick start.</p>
+                        <div class="price-wrap"><span class="price">₹259</span></div>
+                        <button class="btn-add-to-cart action-btn">Add to Cart</button><br>
+                      <button class="btn-add-to-cart action-btn" onclick="window.location.href='benefit_1.html'">Discover Benefits</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Rasp Heaven -->
+            <div class="col product-item" data-category="energy">
+                <div class="product-card">
+                    <a href="benefits.html" class="card-img-wrapper text-decoration-none" style="background: #E8F5E9;">
+                        <img src="./images/rasp.png" class="card-img-top" alt="Rasp Heaven">
+                    </a>
+                    <div class="card-body">
+                        <span class="product-tags">Vitamin C • Polyphenols</span>
+                        <h4 class="card-title mt-1">Rasp Heaven</h4>
+                        <p class="card-text">Raspberry, blueberry, and a hint of mint.</p>
+                        <div class="price-wrap"><span class="price">₹299</span></div>
+                        <button class="btn-add-to-cart action-btn">Add to Cart</button><br>
+                        <button class="btn-add-to-cart action-btn" onclick="window.location.href='benefit_2.html'">Discover Benefits</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Mixed Burst -->
+            <div class="col product-item" data-category="hydration">
+                <div class="product-card">
+                    <a href="benefits.html" class="card-img-wrapper text-decoration-none" style="background: #FFEBEE;">
+                        <img src="./images/peach.png" class="card-img-top" alt="Mixed Burst">
+                    </a>
+                    <div class="card-body">
+                        <span class="product-tags">Vitamin E • Fibres</span>
+                        <h4 class="card-title mt-1">Mixed Burst</h4>
+                        <p class="card-text">Mixed fruits with a burst of nutrition.</p>
+                        <div class="price-wrap"><span class="price">₹149</span></div>
+                        <button class="btn-add-to-cart action-btn">Add to Cart</button><br>
+                        <button class="btn-add-to-cart action-btn" onclick="window.location.href='benefit_3.html'">Discover Benefits</button>  
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Dark Delight -->
+            <div class="col product-item" data-category="energy">
+                <div class="product-card">
+                    <a href="benefits.html" class="card-img-wrapper text-decoration-none" style="background: #FFF8E7;">
+                        <!-- Placeholder for dark cocoa berry -->
+                        <img src="./images/black.png" class="card-img-top" alt="Dark Delight">
+                    </a>
+                    <div class="card-body">
+                        <span class="product-tags">Energy • Brain Booster</span>
+                        <h4 class="card-title mt-1">Dark Delight</h4>
+                        <p class="card-text">A rich blend of dark fruits and herbs for a deep, satisfying taste.</p>
+                        <div class="price-wrap"><span class="price">₹299</span></div>
+                        <button class="btn-add-to-cart action-btn">Add to Cart</button><br> 
+                        <button class="btn-add-to-cart action-btn" onclick="window.location.href='benefit_4.html'">Discover Benefits</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Sweet Slice -->
+            <div class="col product-item" data-category="hydration">
+                <div class="product-card">
+                    <a href="benefits.html" class="card-img-wrapper text-decoration-none" style="background: #FFEBEE;">
+                        <!-- Placeholder for Strawberry Watermelon -->
+                        <img src="./images/pink.png" class="card-img-top" alt="Sweet Slice">
+                    </a>
+                    <div class="card-body">
+                        <span class="product-tags">Hydration • Recovery</span>
+                        <h4 class="card-title mt-1">Sweet Slice</h4>
+                        <p class="card-text">A refreshing blend of sweet fruits like Watermelon and strawberries.</p>
+                        <div class="price-wrap"><span class="price">₹159</span></div>
+                        <button class="btn-add-to-cart action-btn">Add to Cart</button><br>
+                     <button class="btn-add-to-cart action-btn" onclick="window.location.href='benefit_5.html'">Discover Benefits</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Blue Blast -->
+            <div class="col product-item" data-category="immunity">
+                <div class="product-card">
+                    <a href="benefits.html" class="card-img-wrapper text-decoration-none" style="background: #F3E8FF;">
+                        <!-- Placeholder for Blueberry Mint -->
+                        <img src="./images/blue.jpeg" class="card-img-top" alt="Blue Blast">
+                    </a>
+                    <div class="card-body">
+                        <span class="product-tags">Skin Health • Vitamin K</span>
+                        <h4 class="card-title mt-1">Blue Blast</h4>
+                        <p class="card-text">Pure cold-pressed blueberry tinch of fresh lime and mint.</p>
+                        <div class="price-wrap"><span class="price">₹259</span></div>
+                        <button class="btn-add-to-cart action-btn">Add to Cart</button><br>
+                      <button class="btn-add-to-cart action-btn" onclick="window.location.href='benefit_6.html'">Discover Benefits</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer-custom pt-5 pb-4">
+        <div class="container">
+            <div class="row text-center text-md-start">
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold" style="font-family: 'Poppins', sans-serif; color: var(--brand-secondary);">Pure Juice<span class="brand-dot">.</span></h5>
+                    <p style="color: #9CA3AF; font-size: 0.95rem;">
+                        Redefining daily wellness. We craft 100% cold-pressed, raw juices packed with essential vitamins to fuel your modern lifestyle.
+                    </p>
+                    </p>
+                </div>
+
+
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold" style="font-family: 'Poppins', sans-serif;">Contact</h5>
+                    <p style="color: #9CA3AF;"><i class="bi bi-house-door-fill me-3"></i> ################</p>
+                    <p style="color: #9CA3AF;"><i class="bi bi-envelope-fill me-3"></i> krishdas@gmail.com</p>
+                    <p style="color: #9CA3AF;"><i class="bi bi-telephone-fill me-3"></i> +91 8240944803</p>
+                </div>
+
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold" style="font-family: 'Poppins', sans-serif;">Follow Us</h5>
+                    <div class="d-flex justify-content-center justify-content-md-start gap-3 mt-4">
+                        <a href="https://www.instagram.com/krish_d.64/" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://github.com/krishdas395-cyber" class="social-icon" aria-label="Twitter"><i class="bi bi-github"></i></a>
+                        <a href="https://www.linkedin.com/in/krish-das-516350365/" class="social-icon" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="mb-4 mt-4" style="border-color: rgba(255,255,255,0.1);">
+
+            <div class="row align-items-center">
+                <div class="col-md-7 col-lg-8">
+                    <p class="mb-0" style="color: #9CA3AF; font-size: 0.9rem;">
+                        &copy; 2026 Pure Juice. All rights reserved. | Handcrafted by <span class="blue">Krish Das</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const products = document.querySelectorAll('.product-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filterValue = this.getAttribute('data-filter');
+
+                    products.forEach(product => {
+                        if (filterValue === 'all' || product.getAttribute('data-category') === filterValue) {
+                            product.style.display = 'block';
+                            setTimeout(() => {
+                                product.style.opacity = '1';
+                                product.style.transform = 'scale(1)';
+                            }, 50);
+                        } else {
+                            product.style.opacity = '0';
+                            product.style.transform = 'scale(0.8)';
+                            setTimeout(() => {
+                                product.style.display = 'none';
+                            }, 400); 
+                        }
+                    });
+                });
+            });
+
+            const addToCartButtons = document.querySelectorAll('.action-btn');
+            const cartCounter = document.getElementById('cart-counter');
+            let currentItems = 0;
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+                    currentItems++;
+                    cartCounter.innerText = currentItems;
+                    
+                    const originalText = this.innerText;
+                    this.innerText = "Added!";
+                    this.style.backgroundColor = "#111827"; 
+                    
+                    setTimeout(() => {
+                        this.innerText = originalText;
+                        this.style.backgroundColor = "var(--brand-secondary)"; 
+                    }, 1200);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

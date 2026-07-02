@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Burst Benefits | Pure Juice</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --brand-primary: #FF5722;
+            --brand-secondary: #00E676;
+            --bg-color: #FAFBFC;
+            --text-dark: #111827;
+            --text-muted: #6B7280;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif; 
+            padding-top: 100px; /* Space for fixed navbar */
+        }
+
+        h1, h2, h3, h4, h5, h6, .navbar-brand { font-family: 'Poppins', sans-serif; }
+
+        /* Navbar */
+        .navbar { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+        .navbar-brand { font-weight: 800; font-size: 1.8rem; letter-spacing: -0.5px; color: var(--text-dark) !important; }
+        .brand-dot { color: var(--brand-primary); }
+        .nav-link { font-weight: 600; font-size: 0.95rem; color: var(--text-dark) !important; margin: 0 10px;}
+        .nav-link:hover, .nav-link.active { color: var(--brand-primary) !important; }
+        .btn-cart { background: linear-gradient(135deg, var(--brand-primary), #FF8A50); color: white !important; border: none; padding: 8px 24px; font-weight: 600; border-radius: 50px; }
+
+        /* Product Section Styles */
+        .benefit-section { padding: 4rem 0 6rem 0; }
+        .product-visual { position: relative; display: flex; justify-content: center; align-items: center; padding: 2rem; }
+        .circle-backdrop { width: 350px; height: 350px; border-radius: 50%; position: absolute; z-index: 0; background: #F3F4F6; } /* Change this background color for other pages */
+        .product-img { z-index: 1; width: 280px; height: 280px; object-fit: cover; border-radius: 50%; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: transform 0.5s ease; }
+        .product-img:hover { transform: scale(1.05) rotate(3deg); }
+        
+        .tags { font-size: 0.85rem; color: var(--brand-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+        .price { font-size: 2rem; font-weight: 800; margin-bottom: 1.5rem; }
+
+        /* SVG Charts */
+        .chart-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 2rem 0; }
+        .chart-box { text-align: center; }
+        .circular-chart { display: block; margin: 0 auto; max-width: 80px; max-height: 80px; }
+        .circle-bg { fill: none; stroke: #E5E7EB; stroke-width: 3.8; }
+        .circle { fill: none; stroke-width: 2.8; stroke-linecap: round; stroke-dasharray: 0, 100; transition: stroke-dasharray 1.5s ease-out; }
+        
+        .chart-orange { stroke: #FF5722; }
+        .chart-green { stroke: #00E676; }
+        .chart-purple { stroke: #9C27B0; }
+        .chart-red { stroke: #E91E63; }
+        .chart-blue { stroke: #2196F3; }
+        .chart-dark { stroke: #37474F; }
+
+        .percentage { fill: var(--text-dark); font-family: 'Poppins', sans-serif; font-size: 0.5em; text-anchor: middle; font-weight: 700; }
+        .chart-label { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-top: 8px; text-transform: uppercase; }
+
+        /* Buttons */
+        .btn-group-custom { display: flex; gap: 15px; align-items: center; flex-wrap: wrap; }
+        .btn-buy { background-color: var(--text-dark); color: white; border: none; border-radius: 50px; padding: 12px 30px; font-weight: 700; transition: transform 0.2s; }
+        .btn-buy:hover { transform: scale(1.05); color: white; }
+        .btn-add { background-color: white; color: var(--text-dark); border: 2px solid var(--text-dark); border-radius: 50px; padding: 10px 30px; font-weight: 700; transition: all 0.2s; }
+        .btn-add:hover { background-color: var(--text-dark); color: white; }
+        .qty-ui { display: none; align-items: center; background: #F3F4F6; border-radius: 50px; padding: 5px 15px; border: 2px solid var(--text-dark); }
+        .qty-btn { background: none; border: none; font-size: 1.5rem; font-weight: 700; padding: 0 10px; cursor: pointer; }
+        .qty-val { font-weight: 800; font-size: 1.2rem; min-width: 30px; text-align: center; font-family: 'Poppins', sans-serif; }
+
+        /* Footer */
+        .footer-custom { background-color: var(--text-dark); color: white; font-family: 'Inter', sans-serif; margin-top: 4rem;}
+        .blue { color: var(--brand-secondary); }
+        .social-icon { color: white; font-size: 1rem; transition: color 0.3s, transform 0.3s; display: inline-block; }
+        .social-icon:hover { color: var(--brand-secondary); transform: scale(1.2); }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Pure<span class="blue">Drink</span><span class="brand-dot">.</span></a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><i class="bi bi-list fs-1 text-dark"></i></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="shop.html">Shop Juices</a></li>
+                </ul>
+                <a href="noPG.html" class="btn btn-cart">
+                    <i class="bi bi-cart3"></i> Cart <span id="nav-cart-counter" class="badge rounded-pill cart-badge ms-1">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PRODUCT SECTION STARTS HERE -->
+    <section class="benefit-section">
+        <div class="container">
+            <!-- Back to Shop Button -->
+            <a href="shop.html" class="text-decoration-none text-dark fw-bold mb-4 d-inline-block"><i class="bi bi-arrow-left"></i> Back to Shop</a>
+            
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <div class="product-visual">
+                        <div class="circle-backdrop" style="background: #F3F4F6;"></div>
+                        <img src="./images/white.png" alt="White Burst Can" class="product-img">
+                    </div>
+                </div>
+                <div class="col-lg-7 ps-lg-5">
+                    <p class="tags">Immunity • Refreshment • Electrolytes</p>
+                    <h2 class="display-5 fw-bold mb-3">White Burst</h2>
+                    <p class="price">₹259</p>
+                    <p class="text-muted fs-5 mb-4">
+                        <strong>Coconut and lychee for a morning kick start.</strong><br> 
+                        Raw coconut water is nature's perfect isotonic beverage, instantly replenishing cellular hydration and vital electrolytes like potassium and magnesium. Cold-pressed lychee adds a massive surge of Vitamin C and Epicatechin—a powerful antioxidant that combats oxidative stress and fortifies your immune system.
+                    </p>
+
+                    <div class="chart-grid">
+                        <div class="chart-box">
+                            <svg viewBox="0 0 36 36" class="circular-chart">
+                                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <path class="circle chart-green" data-percentage="90" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <text x="18" y="20.35" class="percentage">90%</text>
+                            </svg>
+                            <div class="chart-label">Electrolytes</div>
+                        </div>
+                        <div class="chart-box">
+                            <svg viewBox="0 0 36 36" class="circular-chart">
+                                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <path class="circle chart-orange" data-percentage="85" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <text x="18" y="20.35" class="percentage">85%</text>
+                            </svg>
+                            <div class="chart-label">Vitamin C</div>
+                        </div>
+                        <div class="chart-box">
+                            <svg viewBox="0 0 36 36" class="circular-chart">
+                                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <path class="circle chart-purple" data-percentage="65" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <text x="18" y="20.35" class="percentage">65%</text>
+                            </svg>
+                            <div class="chart-label">Potassium</div>
+                        </div>
+                    </div>
+
+                    <div class="btn-group-custom mt-4">
+                        <button class="btn-buy" onclick="window.location.href='payment.html'">Buy Now</button>
+                        <button class="btn-add" id="add-btn-single" onclick="activateCart()">Add to Cart</button>
+                        <div class="qty-ui" id="qty-ui-single">
+                            <button class="qty-btn" onclick="updateQty(-1)">-</button>
+                            <span class="qty-val" id="qty-val-single">1</span>
+                            <button class="qty-btn" onclick="updateQty(1)">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- PRODUCT SECTION ENDS HERE -->
+
+    <!-- Footer -->
+    <footer class="footer-custom pt-4 pb-3">
+        <div class="container text-center text-md-start">
+            <p class="mb-0" style="color: #9CA3AF; font-size: 0.9rem;">&copy; 2026 Pure Juice. All rights reserved. | Handcrafted by <span class="blue">Krish Das</span></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Cart Logic tailored for a single page
+        let currentLocalQty = 0;
+        function updateCartDisplay() { document.getElementById('nav-cart-counter').innerText = currentLocalQty; }
+
+        function activateCart() {
+            document.getElementById('add-btn-single').style.display = 'none';
+            document.getElementById('qty-ui-single').style.display = 'flex';
+            currentLocalQty = 1;
+            document.getElementById('qty-val-single').innerText = currentLocalQty;
+            updateCartDisplay();
+        }
+
+        function updateQty(change) {
+            currentLocalQty += change;
+            if (currentLocalQty <= 0) {
+                currentLocalQty = 0;
+                document.getElementById('qty-val-single').innerText = "1"; 
+                document.getElementById('qty-ui-single').style.display = 'none';
+                document.getElementById('add-btn-single').style.display = 'block';
+            } else {
+                document.getElementById('qty-val-single').innerText = currentLocalQty;
+            }
+            updateCartDisplay();
+        }
+
+        // Chart Animation Logic
+        document.addEventListener("DOMContentLoaded", function() {
+            const circles = document.querySelectorAll('.circle');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        let path = entry.target;
+                        let percentage = path.getAttribute('data-percentage');
+                        path.style.strokeDasharray = `${percentage}, 100`;
+                        observer.unobserve(path); 
+                    }
+                });
+            }, { threshold: 0.5 });
+            circles.forEach(circle => observer.observe(circle));
+        });
+    </script>
+</body>
+</html>
